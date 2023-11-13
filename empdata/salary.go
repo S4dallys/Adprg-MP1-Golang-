@@ -61,9 +61,11 @@ func Generate_Day_Report(day_type Bitfield, day Day, daily_rate float64, max_reg
 
 	// account for minutes (2:01 will be less than an hour so get its ceiling)
 	// unless end time compensates for it
-	if day.In_Time.Minute != 0  && in_hour == out_hour && day.Out_Time.Minute < day.In_Time.Minute {
+	if in_hour == out_hour && day.Out_Time.Minute < day.In_Time.Minute {
 		in_hour = (in_hour + 1) % 24
-	} 
+	} else if in_hour != out_hour && day.Out_Time.Minute < day.In_Time.Minute && day.Out_Time.Minute + day.In_Time.Minute < 60 {
+		in_hour = (in_hour + 1) % 24
+	}
 
 	ot_hours, reg_ns_hours, ot_ns_hours := Calculate_Hours_Worked(in_hour, out_hour, max_reg_hours)
 
