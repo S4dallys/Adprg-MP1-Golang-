@@ -111,7 +111,7 @@ func Generate_Day_Report(day_type Bitfield, day Day, daily_rate float64, max_reg
 				m_base * float64(ot_ns_hours) * M_OT * M_NS)
 		}
 	} else {
-		if (day_type != D_NORMAL) {
+		if (day_type != D_NORMAL && day_type != D_SNW) {
 			salary = daily_rate;
 		}
 	}
